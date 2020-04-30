@@ -30,13 +30,16 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    @Html.ActionLink("Home","Index","Home",null,new {@class="nav-link"})
+                    @Html.ActionLink("Home", "Index", "Home", null, new { @class = "nav-link" })
                 </li>
                 <li class="nav-item">
                     @Html.ActionLink("About", "About", "Home", null, new { @class = "nav-link" })
                 </li>
                 <li class="nav-item">
                     @Html.ActionLink("Contact", "Contact", "Home", null, new { @class = "nav-link" })
+                </li>
+                <li class="nav-item">
+                    @Html.ActionLink("Administration", "Index", "Dashboard", new {area ="Admin"}, new { @class = "nav-link" })
                 </li>
             </ul>
         </div>

@@ -16,6 +16,7 @@ namespace SpringBlog.Models
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
             var userIdentity = await manager.CreateIdentityAsync(this, DefaultAuthenticationTypes.ApplicationCookie);
             // Add custom user claims here
+            userIdentity.AddClaim(new Claim("DisplayName",DisplayName)); // default olarak cookie'e displayname(biz verdik) de ekler
             return userIdentity;
         }
 
@@ -26,8 +27,7 @@ namespace SpringBlog.Models
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
-        public ApplicationDbContext()
-            : base("ApplicationDbContext", throwIfV1Schema: false)
+        public ApplicationDbContext(): base("ApplicationDbContext", throwIfV1Schema: false)
         {
         }
 

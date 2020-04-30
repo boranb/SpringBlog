@@ -26,7 +26,7 @@ namespace SpringBlog.Models
         public string PhotoPath { get; set; }
 
         [Required]
-        [MaxLength]
+        [MaxLength(200)]
         public string Slug { get; set; }
 
         [Required]
