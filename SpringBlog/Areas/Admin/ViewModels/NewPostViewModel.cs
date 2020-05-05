@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using SpringBlog.Helpers;
 using SpringBlog.Models;
 
 namespace SpringBlog.Areas.Admin.ViewModels
@@ -20,6 +21,13 @@ namespace SpringBlog.Areas.Admin.ViewModels
         [AllowHtml]
         public string Content { get; set; }
 
-        public string PhotoPath { get; set; }
+        [PostedImage]
+        public HttpPostedFileBase FeaturedImage { get; set; }
+
+        [Required]
+        [StringLength(200)]
+        [Display(Name = "Short Url")]
+        public string Slug { get; set; }
+
     }
 }
