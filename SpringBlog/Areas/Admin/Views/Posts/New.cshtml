@@ -84,6 +84,7 @@
 
                 $.post("@Url.Action("ConvertToSlug")", { title: title }, function (data) {
                     $("#Slug").val(data);
+                    $("#Slug").trigger("blur"); // validation'ı tetiklemek için // in order to trigger validation blur
                 });
             }
         });

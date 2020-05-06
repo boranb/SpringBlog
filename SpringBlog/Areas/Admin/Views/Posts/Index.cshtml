@@ -33,10 +33,10 @@
                     <td>@item.CreationTime.Value</td>
                     <td>
                         <a href="@Url.Action("Edit",new {id=item.Id})" class="btn btn-info">
-                            <i class="fas fa-edit"></i>Edit
+                            <i class="fas fa-edit"></i>
                         </a>
                         <a href="#" class="btn btn-danger" data-delete-id="@item.Id" data-delete-name="@item.Title" data-delete-action="@Url.Action("Delete")" data-toggle="modal" data-target="#deleteModal">
-                            <i class="fas fa-trash"></i>Delete
+                            <i class="fas fa-trash"></i>
                         </a>
                     </td>
                 </tr>
