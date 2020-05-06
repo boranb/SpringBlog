@@ -3,17 +3,39 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using SpringBlog.Models;
 using SpringBlog.ViewModel;
 
 namespace SpringBlog.Controllers
 {
     public class HomeController : BaseController
     {
-        public ActionResult Index()
+        public ActionResult Index(string q, int? cid)
         {
+            IQueryable<Post> posts = db.Posts;
+            Category category = null;
+
+            if (q != null)
+            {
+                posts = posts.Where(x => x.Category.CategoryName.Contains(q) || x.Title.Contains(q) || x.Content.Contains(q));
+            }
+
+            if (cid != null && q == null)
+            {
+                category = db.Categories.Find(cid);
+
+                if (category == null)
+                {
+                    return HttpNotFound();
+                }
+                posts = posts.Where(x => x.CategoryId == cid);
+            }
+
             var vm = new HomeIndexViewModel()
             {
-                Posts = db.Posts.OrderByDescending(x=>x.CreationTime).ToList()
+                Posts = posts.OrderByDescending(x => x.CreationTime).ToList(),
+                Category = category,
+                SearchTerm = q
             };
             return View(vm);
         }
@@ -35,7 +57,7 @@ namespace SpringBlog.Controllers
         public ActionResult CategoriesPartial()
         {
             var cats = db.Categories.OrderBy(x => x.CategoryName).ToList();
-            return PartialView("_CategoriesPartial",cats);
+            return PartialView("_CategoriesPartial", cats);
         }
     }
 }
