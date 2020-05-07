@@ -1,4 +1,4 @@
-﻿@model SpringBlog.Models.IndexViewModel
+﻿@model IndexViewModel
 @{
     ViewBag.Title = "Manage";
 }
@@ -9,7 +9,6 @@
 <div>
     <h4>Change your account settings</h4>
     <hr />
-
     <div class="manage-profile-photo-container float-right text-center">
         <a href="#" class="small" data-toggle="modal" data-target="#modalChangePhoto">
             <img id="profilePhoto" src="@Url.LoggedInProfilePhoto()" alt="profile photo" width="100" /> <br />
@@ -92,8 +91,10 @@
                 }*@
         </dd>
     </dl>
+
 </div>
 
+<!-- Modal -->
 <!-- Modal -->
 <div class="modal fade" id="modalChangePhoto" tabindex="-1" role="dialog" aria-labelledby="modalChangePhotoTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
@@ -109,9 +110,9 @@
                     <input type="file" class="custom-file-input" id="file-input">
                     <label class="custom-file-label" for="customFile" data-browse="Browse">Choose file</label>
                 </div>
-
                 <div class="cropper-wrapper">
-                    <div class="cropper"></div>
+                    <div class="cropper">
+                    </div>
                 </div>
 
             </div>
@@ -123,8 +124,7 @@
     </div>
 </div>
 
-@section scripts {
-
+@section scripts{
     <script>
         var cropper = null;
 
@@ -152,8 +152,11 @@
         $('#modalChangePhoto').on('hidden.bs.modal', function (e) {
             $("#file-input").val(null);
             $(".custom-file-label").text("Choose file");
-            cropper.croppie('destroy');
-            cropper = null;
+            if (cropper) {
+                cropper.croppie('destroy');
+                cropper = null;
+            }
+
         });
 
         $("#btnUpload").click(function () {
@@ -166,6 +169,7 @@
             });
 
         });
+
     </script>
 
 }
