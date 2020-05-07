@@ -211,6 +211,10 @@
     <Compile Include="Migrations\202004301931308_fix.Designer.cs">
       <DependentUpon>202004301931308_fix.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202005071611332_ProfilePhoto.cs" />
+    <Compile Include="Migrations\202005071611332_ProfilePhoto.Designer.cs">
+      <DependentUpon>202005071611332_ProfilePhoto.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Category.cs" />
@@ -1906,6 +1910,7 @@
     <Content Include="Content\bootstrap-reboot.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\croppie.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -1914,6 +1919,7 @@
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\croppie.min.js" />
     <Content Include="Scripts\esm\popper-utils.js" />
     <Content Include="Scripts\esm\popper-utils.min.js" />
     <Content Include="Scripts\esm\popper.js" />
@@ -2167,7 +2173,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Data\" />
     <Folder Include="Areas\Admin\Views\AdminBase\" />
-    <Folder Include="Upload\" />
+    <Folder Include="Upload\Profiles\" />
     <Folder Include="Views\Base\" />
   </ItemGroup>
   <ItemGroup>
@@ -2277,6 +2283,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202004301931308_fix.resx">
       <DependentUpon>202004301931308_fix.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005071611332_ProfilePhoto.resx">
+      <DependentUpon>202005071611332_ProfilePhoto.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

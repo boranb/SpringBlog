@@ -4,6 +4,8 @@ using System.Linq;
 using System.Security.Claims;
 using System.Security.Principal;
 using System.Web;
+using Microsoft.AspNet.Identity;
+using SpringBlog.Models;
 
 namespace SpringBlog.Helpers
 {
@@ -16,6 +18,15 @@ namespace SpringBlog.Helpers
            string displayName = claims.FirstOrDefault(x => x.Type == "DisplayName").Value;
 
             return displayName;
+        }
+        public static string ProfilePhoto(this IIdentity identity)
+        {
+            using (var db = new ApplicationDbContext())
+            {
+                var userId = identity.GetUserId();
+                var user = db.Users.Find(userId);
+                return user.ProfilePhoto;
+            }
         }
     }
 }
