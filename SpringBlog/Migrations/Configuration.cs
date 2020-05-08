@@ -18,7 +18,7 @@ namespace SpringBlog.Migrations
         }
 
         // https://stackoverflow.com/questions/19280527/mvc-5-seed-users-and-roles
-
+        
         protected override void Seed(SpringBlog.Models.ApplicationDbContext context)
         {
             if (!context.Roles.Any(r => r.Name == "admin"))
@@ -75,7 +75,6 @@ namespace SpringBlog.Migrations
                     });
                 }
                 #endregion
-
             }
 
             #region GeneratePosts

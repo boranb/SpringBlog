@@ -40,7 +40,7 @@ namespace SpringBlog.Controllers
                 Category = category,
                 SearchTerm = q,
                 CategoryId = cid,
-
+                
             };
             return View(vm);
         }
