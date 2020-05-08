@@ -34,9 +34,9 @@ namespace SpringBlog.Controllers
             {
                 return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             }
-            private set 
-            { 
-                _signInManager = value; 
+            private set
+            {
+                _signInManager = value;
             }
         }
 
@@ -334,13 +334,24 @@ namespace SpringBlog.Controllers
 
             string fileName = this.SaveProfilePhoto(photoBase64);
             var user = db.Users.Find(User.Identity.GetUserId());
-            this.DeleteImage(user.ProfilePhoto,"Profiles");
+            this.DeleteImage(user.ProfilePhoto, "Profiles");
             user.ProfilePhoto = fileName;
             db.SaveChanges();
 
-            return Json(new {photoUrl = Url.ProfilePhoto(fileName)});
+            return Json(new { photoUrl = Url.ProfilePhoto(fileName) });
         }
 
+        [HttpPost]
+        public ActionResult DeleteProfilePhoto()
+        {
+
+            var user = db.Users.Find(User.Identity.GetUserId());
+            this.DeleteImage(user.ProfilePhoto, "Profiles");
+            user.ProfilePhoto = null;
+            db.SaveChanges();
+
+            return Json(new { photoUrl = Url.ProfilePhoto(null) });
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing && _userManager != null)
@@ -352,7 +363,7 @@ namespace SpringBlog.Controllers
             base.Dispose(disposing);
         }
 
-#region Helpers
+        #region Helpers
         // Used for XSRF protection when adding external logins
         private const string XsrfKey = "XsrfId";
 
@@ -403,6 +414,6 @@ namespace SpringBlog.Controllers
             Error
         }
 
-#endregion
+        #endregion
     }
 }
