@@ -21,9 +21,7 @@
             </div>
         </div>
         <img id="profilePhoto" class="rounded" src="@Url.LoggedInProfilePhoto()" alt="profile photo" width="161" /> <br />
-
     </div>
-
 
     <dl class="dl-horizontal">
         <dt>Password:</dt>
@@ -31,11 +29,11 @@
             [
             @if (Model.HasPassword)
             {
-                @Html.ActionLink("Change your password", "ChangePassword")
+            @Html.ActionLink("Change your password", "ChangePassword")
             }
             else
             {
-                @Html.ActionLink("Create", "SetPassword")
+            @Html.ActionLink("Create", "SetPassword")
             }
             ]
         </dd>
@@ -100,7 +98,6 @@
                 }*@
         </dd>
     </dl>
-
 </div>
 
 <!-- Modal -->
@@ -123,7 +120,6 @@
                     <div class="cropper">
                     </div>
                 </div>
-
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

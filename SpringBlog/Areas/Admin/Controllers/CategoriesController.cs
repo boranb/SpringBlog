@@ -1,10 +1,7 @@
 ﻿using SpringBlog.Models;
-using System;
-using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 
 namespace SpringBlog.Areas.Admin.Controllers
@@ -21,6 +18,7 @@ namespace SpringBlog.Areas.Admin.Controllers
         {
             return View();
         }
+
         [HttpPost, ValidateAntiForgeryToken]
         public ActionResult New(Category category)
         {

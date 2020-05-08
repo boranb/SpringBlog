@@ -1,5 +1,4 @@
-﻿using System.Web;
-using System.Web.Optimization;
+﻿using System.Web.Optimization;
 
 namespace SpringBlog
 {
@@ -28,11 +27,11 @@ namespace SpringBlog
 
             //normalde bunu yazmaya gerek yok, release mod'da şalışırken farkı göstermek istedik
 
-            #if DEBUG
-                BundleTable.EnableOptimizations = false;
-            #else
+#if DEBUG
+            BundleTable.EnableOptimizations = false;
+#else
                 BundleTable.EnableOptimizations = true; // boş alanları silip minify halde yayınlar
-            #endif
+#endif
         }
     }
 }

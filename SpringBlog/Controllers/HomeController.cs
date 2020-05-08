@@ -11,7 +11,9 @@ namespace SpringBlog.Controllers
 {
     public class HomeController : BaseController
     {
-        public ActionResult Index(string q, int? cid, int page = 1)
+        [Route("", Order = 2, Name = "HomeDefault")]
+        [Route("c/{cid}/{slug}", Order = 1)]
+        public ActionResult Index(string q, int? cid, string slug, int page = 1)
         {
             var pageSize = 10;
 
@@ -36,11 +38,11 @@ namespace SpringBlog.Controllers
 
             var vm = new HomeIndexViewModel()
             {
-                Posts = posts.OrderByDescending(x => x.CreationTime).ToPagedList(page,pageSize),
+                Posts = posts.OrderByDescending(x => x.CreationTime).ToPagedList(page, pageSize),
                 Category = category,
                 SearchTerm = q,
                 CategoryId = cid,
-                
+
             };
             return View(vm);
         }

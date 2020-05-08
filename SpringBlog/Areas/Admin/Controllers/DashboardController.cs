@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using SpringBlog.Areas.Admin.ViewModels;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using SpringBlog.Areas.Admin.ViewModels;
 
 namespace SpringBlog.Areas.Admin.Controllers
 {
@@ -17,7 +14,7 @@ namespace SpringBlog.Areas.Admin.Controllers
                 CategoryCount = db.Categories.Count(),
                 PostCount = db.Posts.Count(),
                 UserCount = db.Users.Count(),
-                AdminCount = db.Roles.FirstOrDefault(x=>x.Name == "admin").Users.Count()
+                AdminCount = db.Roles.FirstOrDefault(x => x.Name == "admin").Users.Count()
             };
             return View(vm);
         }

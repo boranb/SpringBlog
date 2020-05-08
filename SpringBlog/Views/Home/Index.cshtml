@@ -4,8 +4,6 @@
     ViewBag.Title = "Home Page";
 }
 
-
-
 <h1 class="my-4">
     @if (Model.SearchTerm != null)
     {
@@ -46,7 +44,6 @@
     </div>
 }
 
-
 <!-- Pagination -->
 
 <nav aria-label="Page Number and Pagination">
@@ -55,7 +52,7 @@
     </div>
 
     @Html.PagedListPager(Model.Posts, page => Url.Action("Index",
-        new { page, cid = Model.CategoryId, q = Model.SearchTerm }), new PagedListRenderOptionsBase
+        new { page, q = Model.SearchTerm }), new PagedListRenderOptionsBase
         {
             ContainerDivClasses = new string[] { "pagination-container", "d-flex" },
             UlElementClasses = new string[] { "pagination", "mx-auto" },
@@ -66,7 +63,7 @@
             LinkToLastPageFormat = "&raquo;",
             LinkToPreviousPageFormat = "&lsaquo;",
             LinkToNextPageFormat = "&rsaquo;",
-            MaximumPageNumbersToDisplay = 5,
+            MaximumPageNumbersToDisplay = 5
         })
 </nav>
 

@@ -1,12 +1,11 @@
-using System.Collections.Generic;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using SpringBlog.Models;
+using System.Collections.Generic;
 
 namespace SpringBlog.Migrations
 {
     using System;
-    using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
 
@@ -18,7 +17,7 @@ namespace SpringBlog.Migrations
         }
 
         // https://stackoverflow.com/questions/19280527/mvc-5-seed-users-and-roles
-        
+
         protected override void Seed(SpringBlog.Models.ApplicationDbContext context)
         {
             if (!context.Roles.Any(r => r.Name == "admin"))
@@ -46,11 +45,13 @@ namespace SpringBlog.Migrations
                 manager.AddToRole(user.Id, "admin");
 
                 #region Seed Categories and Posts
+
                 if (!context.Categories.Any())
                 {
                     context.Categories.Add(new Category
                     {
                         CategoryName = "Sample Category 1",
+                        Slug = "sample-category-1",
                         Posts = new List<Post>
                         {
                             new Post
@@ -74,7 +75,8 @@ namespace SpringBlog.Migrations
                         }
                     });
                 }
-                #endregion
+
+                #endregion Seed Categories and Posts
             }
 
             #region GeneratePosts
@@ -85,11 +87,12 @@ namespace SpringBlog.Migrations
                 context.Categories.Add(new Category
                 {
                     CategoryName = "Generated Posts",
+                    Slug = "generated-posts",
                     Posts = GeneratePosts(userId)
                 });
             }
 
-            #endregion
+            #endregion GeneratePosts
         }
 
         private List<Post> GeneratePosts(string userId, int count = 100)
@@ -111,6 +114,5 @@ namespace SpringBlog.Migrations
 
             return posts;
         }
-
     }
 }

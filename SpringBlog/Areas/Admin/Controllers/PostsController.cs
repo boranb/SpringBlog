@@ -1,19 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Web;
-using System.Web.Mvc;
-using Microsoft.AspNet.Identity;
+﻿using Microsoft.AspNet.Identity;
 using SpringBlog.Areas.Admin.ViewModels;
 using SpringBlog.Helpers;
 using SpringBlog.Models;
+using System;
+using System.Linq;
+using System.Net;
+using System.Web.Mvc;
 
 namespace SpringBlog.Areas.Admin.Controllers
 {
     public class PostsController : AdminBaseController
     {
-
         public ActionResult Index()
         {
             return View(db.Posts.ToList());
@@ -26,6 +23,7 @@ namespace SpringBlog.Areas.Admin.Controllers
                 new SelectList(db.Categories.OrderBy(x => x.CategoryName).ToList(), "Id", "CategoryName");
             return View();
         }
+
         [HttpPost, ValidateAntiForgeryToken]
         public ActionResult New(NewPostViewModel vm)
         {
@@ -83,7 +81,6 @@ namespace SpringBlog.Areas.Admin.Controllers
             return View(vm);
         }
 
-
         [HttpPost, ValidateAntiForgeryToken]
         public ActionResult Edit(EditPostViewModel vm)
         {
@@ -112,8 +109,6 @@ namespace SpringBlog.Areas.Admin.Controllers
             return View();
         }
 
-
-
         [HttpPost, ValidateAntiForgeryToken]
         public ActionResult Delete(int id)
         {
@@ -130,13 +125,5 @@ namespace SpringBlog.Areas.Admin.Controllers
             TempData["SuccessMessage"] = "The post deleted successfully.";
             return RedirectToAction("Index");
         }
-
-        [HttpPost]
-        public string ConvertToSlug(string title)
-        {
-            return UrlService.URLFriendly(title);
-        }
-
-
     }
 }

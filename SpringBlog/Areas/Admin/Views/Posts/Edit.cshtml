@@ -1,4 +1,4 @@
-﻿@model EditPostViewModel
+﻿﻿@model EditPostViewModel
 @{
     ViewBag.Title = "Edit Post";
 }
@@ -11,7 +11,7 @@
     @Html.HiddenFor(x => x.CreationTime)
     @Html.HiddenFor(x => x.ModificationTime)
 
-    <div class="card card-primary card-outline">
+    <div class="card card-primary">
         <div class="card-header">
             <h3 class="card-title">Edit the Post</h3>
         </div>
@@ -34,17 +34,15 @@
             <div class="form-group">
                 @Html.TextAreaFor(x => x.Content, new { @class = "form-control", data_snote = "true" })
                 @Html.ValidationMessageFor(x => x.Content, null, new { @class = "text-danger" })
-
                 <div class="small text-right">
-                    @Html.LabelFor(x => x.CreationTime,new {@class="text-success"})
+                    @Html.LabelFor(x => x.CreationTime)
                     @Html.DisplayFor(x => x.CreationTime)
 
-                    @Html.LabelFor(x => x.ModificationTime, new {@class = "ml-2 text-warning"})
+                    @Html.LabelFor(x => x.ModificationTime, new { @class = "ml-1" })
                     @Html.DisplayFor(x => x.ModificationTime)
                 </div>
-
             </div>
-            <div class="row">
+            <div class="row form-group">
                 <div class="col-md-6 form-inline my-1">
                     <label for="exampleInputFile">Featured Image</label>
                     <div class="input-group flex-fill ml-2">
@@ -55,12 +53,12 @@
                             </label>
                         </div>
                     </div>
-                    @Html.ValidationMessage("FeaturedImage", null, new { @class = "text-danger" })
+                    @Html.ValidationMessage("FeaturedImage", null, new { @class = "text-danger ml-1" })
                 </div>
-                <div class="col-md-6 form-inline align-content-start">
+                <div class="col-md-6 form-inline align-content-start my-1">
                     @Html.LabelFor(x => x.Slug)
-                    @Html.TextBoxFor(x => x.Slug, new { @class = "form-control flex-fill ml-2", placeholder = "Short Url: a-sample-url" })
-                    <a id="refreshSlug" href="#" class="btn btn-outline-primary"><i class="fas fa-sync-alt"></i></a>
+                    @Html.TextBoxFor(x => x.Slug, new { @class = "form-control flex-fill ml-2", placeholder = "a-sample-url" })
+                    <a id="refreshSlug" href="#" class="mx-1 btn btn-primary"><i class="fas fa-sync-alt"></i></a>
                     @Html.ValidationMessageFor(x => x.Slug, null, new { @class = "text-danger" })
                 </div>
             </div>
@@ -91,7 +89,7 @@
         </div>
         <!-- /.card-body -->
         <div class="card-footer">
-            <div class="float-right">
+            <div class="float-left">
                 <a href="@Url.Action("Index")" class="btn btn-secondary">Cancel</a>
                 <button type="submit" class="btn btn-primary">Save Changes</button>
             </div>
@@ -101,31 +99,9 @@
     <!-- /.card -->
 }
 
+
 @section scripts {
     <script>
-        $(function () {
-            $("#Title").change(function () {
-                if (!$("#Slug").val()) {
-                    generateSlug();
-                }
-            });
-
-            // butona tıklandığında
-            $("#refreshSlug").click(function (event) {
-                event.preventDefault();
-                generateSlug();
-            });
-
-            function generateSlug() {
-                var title = $("#Title").val();
-                if (!title) return;
-
-                $.post("@Url.Action("ConvertToSlug")", { title: title }, function (data) {
-                    $("#Slug").val(data);
-                    $("#Slug").trigger("blur"); // validation'ı tetiklemek için // in order to trigger validation blur
-                });
-            }
-        });
+        slug.run("#Title", "#Slug", "#refreshSlug");
     </script>
 }
-
