@@ -4,39 +4,28 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
+using SpringBlog.Enums;
 
 namespace SpringBlog.Models
 {
-    public class Post
+    public class Comment
     {
         public int Id { get; set; }
-
         [Required]
-        [ForeignKey("Author")]
         public string AuthorId { get; set; }
-
-        public int CategoryId { get; set; }
-
+        public int? ParentId { get; set; }
+        public int PostId { get; set; }
         [Required]
-        [StringLength(200)]
-        public string Title { get; set; }
-
         public string Content { get; set; }
-
-        public string PhotoPath { get; set; }
-
-        [Required]
-        [StringLength(200)]
-        public string Slug { get; set; }
-
         [Required]
         public DateTime? CreationTime { get; set; }
-
         [Required]
         public DateTime? ModificationTime { get; set; }
-
+        public CommentState State { get; set; }
+        [ForeignKey("AuthorId")]
         public virtual ApplicationUser Author { get; set; }
-        public virtual Category Category { get; set; }
-        public virtual ICollection<Comment> Comments { get; set; }
+        public virtual Post Post { get; set; }
+        public virtual Comment Parent { get; set; }
+        public virtual ICollection<Comment> Children { get; set; }
     }
 }
