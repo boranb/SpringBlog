@@ -3,10 +3,9 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>SpringBlog | @ViewBag.Title</title>
+    <title>SpringBlog | @ViewBag.Title </title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <!-- Font Awesome -->
     <link rel="stylesheet" href="~/Areas/Admin/plugins/fontawesome-free/css/all.min.css">
     <!-- Ionicons -->
@@ -14,10 +13,10 @@
     <!-- DataTables -->
     <link rel="stylesheet" href="~/Areas/Admin/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="~/Areas/Admin/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+    <!--TOASTR-->
     <link href="~/Areas/Admin/plugins/toastr/toastr.min.css" rel="stylesheet" />
     <!-- overlayScrollbars -->
     <link rel="stylesheet" href="~/Areas/Admin/dist/css/adminlte.min.css">
-    <!-- summernote -->
     <link rel="stylesheet" href="~/Areas/Admin/plugins/summernote/summernote-bs4.css">
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
@@ -177,9 +176,9 @@
                             @MenuLink("Dashboard", "Index", "Dashboard", "fas fa-tachometer-alt")
                         </li>
 
+                        <li class="nav-header">Contains Area</li>
                         <!--Categories Area -->
-                        <li class="nav-header">Categories Area</li>
-                        <li class="nav-item has-treeview menu-open">
+                        <li class="nav-item has-treeview">
                             @MenuLink("Categories", "", "Categories", "fas fa-table", true)
 
                             <ul class="nav nav-treeview">
@@ -193,8 +192,7 @@
                         </li>
 
                         <!--Post Area -->
-                        <li class="nav-header">Post Area</li>
-                        <li class="nav-item has-treeview menu-open">
+                        <li class="nav-item has-treeview">
                             @MenuLink("Post", "", "Posts", "fas fa-table", true)
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
@@ -202,6 +200,15 @@
                                 </li>
                                 <li class="nav-item">
                                     @MenuLink("Add New Posts", "New", "Posts", "far fa-plus-square")
+                                </li>
+                            </ul>
+                        </li>
+                        <!--Comments Area -->
+                        <li class="nav-item has-treeview">
+                            @MenuLink("Comments", "", "Comments", "fas fa-comments", true)
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    @MenuLink("List Comments", "Index", "Comments", "fas fa-list")
                                 </li>
                             </ul>
                         </li>
@@ -271,6 +278,8 @@
     <script src="~/Areas/Admin/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
     <script src="~/Areas/Admin/plugins/toastr/toastr.min.js"></script>
     <script src="~/Areas/Admin/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
+    <!-- Tempusdominus Bbootstrap 4 -->
+    <script src="~/Areas/Admin/plugins/bootstrap-switch/js/bootstrap-switch.min.js"></script>
     <!-- AdminLTE App -->
     <script src="~/Areas/Admin/dist/js/adminlte.min.js"></script>
     <!-- AdminLTE for demo purposes -->
@@ -278,13 +287,13 @@
     <!-- Summernote -->
     <script src="~/Areas/Admin/plugins/summernote/summernote-bs4.min.js"></script>
     <!-- Slug js -->
-<script src="~/Areas/Admin/dist/js/slug.js"></script>
+    <script src="~/Areas/Admin/dist/js/slug.js"></script>
 
-<script>
+    <script>
     slug.init("@Url.Action("ConvertToSlug","Slug")");
-</script>
+    </script>
 
-<!-- Data-Table custom js -->
+    <!-- Data-Table custom js -->
     <script src="~/Areas/Admin/dist/js/admin.custom.js"></script>
     @RenderSection("scripts", false)
     <script>
