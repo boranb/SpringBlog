@@ -29,11 +29,11 @@
             [
             @if (Model.HasPassword)
             {
-            @Html.ActionLink("Change your password", "ChangePassword")
+                @Html.ActionLink("Change your password", "ChangePassword")
             }
             else
             {
-            @Html.ActionLink("Create", "SetPassword")
+                @Html.ActionLink("Create", "SetPassword")
             }
             ]
         </dd>
@@ -133,12 +133,12 @@
 
     <script>
         var cropper = null;
-
         $("#file-input").change(function () {
             readFile(this);
             if (this.files && this.files[0]) {
-                $("#btnUpload").removeAttr("disabled", "disabled");
-            } else {
+                $("#btnUpload").removeAttr("disabled");
+            }
+            else {
                 $("#btnUpload").attr("disabled", "disabled");
                 if (cropper) {
                     cropper.croppie('destroy');
@@ -146,54 +146,44 @@
                 }
             }
         });
-
         function readFile(input) {
             if (input.files && input.files[0]) {
                 var reader = new FileReader();
-
                 reader.onload = function (e) {
                     if(cropper == null)
-                        cropper = $('.cropper').croppie();
-
+                        cropper = $('.cropper').croppie({
+                            enableOrientation: true
+                        });
                     cropper.croppie('bind', {
                         url: e.target.result
                     });
                 }
-
                 reader.readAsDataURL(input.files[0]);
             }
         }
-
         $('#modalChangePhoto').on('hidden.bs.modal', function (e) {
             $("#file-input").val(null);
             $(".custom-file-label").text("Choose file");
             $("#btnUpload").attr("disabled", "disabled");
-
             if (cropper) {
                 cropper.croppie('destroy');
                 cropper = null;
             }
         });
-
         $("#btnUpload").click(function () {
-
             if (!cropper) {
                 return;
             }
-
             cropper.croppie('result', {
                 type: "base64", // kırptığına base64 ver
-                size: { width: 500, height: 500 }
+                size: { width: 400, height: 400 }
             }).then(function (base64) {
-                $.post("@Url.Action("UploadProfilePhoto")",
-                    { photoBase64: base64 },
-                    function(data) {
-                        $("#profilePhoto").attr('src', data.photoUrl);
-                        $("#modalChangePhoto").modal('hide');
-                    });
+                $.post("@Url.Action("UploadProfilePhoto")", { photoBase64: base64 }, function (data) {
+                    $("#profilePhoto").attr('src', data.photoUrl);
+                    $("#modalChangePhoto").modal('hide');
+                })
             });
         });
-
         $("#btnDeletePhoto").click(function () {
             $.post("@Url.Action("DeleteProfilePhoto")", function (data) {
                 $("#profilePhoto").attr('src', data.photoUrl);
