@@ -17,6 +17,7 @@ namespace SpringBlog.Areas.Admin.Controllers
             return View(db.Comments.ToList()); // datatable kullandığımız için direkt listeye aktardık
             //return View(db.Comments.OrderByDescending(x=>x.CreationTime).ToList()); 
         }
+
         [HttpPost]
         public ActionResult ChangeState(int id, bool isPublished)
         {
@@ -24,6 +25,17 @@ namespace SpringBlog.Areas.Admin.Controllers
             comment.State = isPublished ? CommentState.Approved : CommentState.Rejected;
             db.SaveChanges();
             return new HttpStatusCodeResult(HttpStatusCode.OK);
+        }
+
+        [HttpPost,ValidateAntiForgeryToken]
+        public ActionResult Delete(int id)
+        {
+            var comment = db.Comments.Find(id);
+            db.Comments.RemoveRange(comment.Children);
+            db.Comments.Remove(comment);
+            db.SaveChanges();
+
+            return RedirectToAction("Index");
         }
     }
 }

@@ -16,8 +16,8 @@
                     <th>Content</th>
                     <th>Author</th>
                     <th>Post Title</th>
-                    <th>Creation Time</th>
-                    <th>Is Published</th>
+                    <th>Time</th>
+                    <th>Published</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -26,7 +26,13 @@
                 {
                     <tr>
                         <td>@item.Id</td>
-                        <td>@item.Content</td>
+                        <td>@item.Content
+                            @if (item.Parent != null)
+                            {
+                                <br/>
+                                <small>(Reply to the comment #@item.Parent.Id)</small>
+                            }
+                        </td>
                         <td>@item.Author.DisplayName</td>
                         <td>@item.Post.Title</td>
                         <td>@item.CreationTime.Value</td>

@@ -178,7 +178,7 @@
 
                         <li class="nav-header">Contains Area</li>
                         <!--Categories Area -->
-                        <li class="nav-item has-treeview">
+                        <li class="nav-item has-treeview menu-open">
                             @MenuLink("Categories", "", "Categories", "fas fa-table", true)
 
                             <ul class="nav nav-treeview">
@@ -192,7 +192,7 @@
                         </li>
 
                         <!--Post Area -->
-                        <li class="nav-item has-treeview">
+                        <li class="nav-item has-treeview menu-open">
                             @MenuLink("Post", "", "Posts", "fas fa-table", true)
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
@@ -204,7 +204,7 @@
                             </ul>
                         </li>
                         <!--Comments Area -->
-                        <li class="nav-item has-treeview">
+                        <li class="nav-item has-treeview menu-open">
                             @MenuLink("Comments", "", "Comments", "fas fa-comments", true)
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
@@ -290,7 +290,7 @@
     <script src="~/Areas/Admin/dist/js/slug.js"></script>
 
     <script>
-    slug.init("@Url.Action("ConvertToSlug","Slug")");
+        slug.init("@Url.Action("ConvertToSlug","Slug")");
     </script>
 
     <!-- Data-Table custom js -->
