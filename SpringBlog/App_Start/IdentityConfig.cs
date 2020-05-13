@@ -7,6 +7,7 @@ using SpringBlog.Models;
 using System;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using SpringBlog.Helpers;
 
 namespace SpringBlog
 {
@@ -15,7 +16,7 @@ namespace SpringBlog
         public Task SendAsync(IdentityMessage message)
         {
             // Plug in your email service here to send an email.
-            return Task.FromResult(0);
+            return EmailUtilities.SendMailAsync(message.Destination, message.Subject, message.Body);
         }
     }
 
