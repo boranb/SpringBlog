@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
+using System.Net;
 using System.Net.Mail;
 using System.Threading.Tasks;
 using System.Web;
@@ -14,14 +16,18 @@ namespace SpringBlog.Helpers
             //http://csharp.net-informations.com/communications/csharp-smtp-mail.htm
             MailMessage mail = new MailMessage();
 
-            mail.From = new MailAddress("info@bekoo.co");
+            mail.From = new MailAddress(ConfigurationManager.AppSettings["mailAccount"], "SpringBlog");
             mail.To.Add(destination);
             mail.Subject = subject;
             mail.Body = body;
             mail.IsBodyHtml = true;
 
-            using (var smtpClient = new SmtpClient("bekoo.co"))
+            using (var smtpClient = new SmtpClient())
             {
+                smtpClient.Credentials = new NetworkCredential(
+                    ConfigurationManager.AppSettings["mailAccount"],
+                    ConfigurationManager.AppSettings["mailPassword"]
+                    );
                 await smtpClient.SendMailAsync(mail);
             }
 
