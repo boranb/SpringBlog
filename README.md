@@ -1,3 +1,3 @@
 # SpringBlog
 
-demo: blog.bekoo.co
+Demo: https://blog.bekoo.co/
